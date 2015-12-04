@@ -28,7 +28,17 @@ function loadData() {
     var nytUrl = nytApiUrl + nytQuery + nytApiKey;
 
     $.getJSON(nytUrl, function(data) {
-        console.log(data);
+
+        // console.log(data);
+
+        var docs = data.response.docs;
+        var docsLength = docs.length;
+        var i;
+
+        for (i = 0; i < docsLength; i++) {
+            $nytElem.append('<li class="article"><a href="' + docs[i].web_url + '">' + docs[i].headline.main + '</a><p>' + docs[i].snippet + '</p></li>');
+        }
+        
     });
 
     return false;
